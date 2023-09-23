@@ -15,7 +15,6 @@ class Chamado(AbstractChamado):
             descricao: str,
             prioridade: int,
             tipo: TipoChamado):
-        super().__init__()
         self.__data = data
         self.__cliente = cliente
         self.__tecnico = tecnico

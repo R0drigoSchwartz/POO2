@@ -4,7 +4,8 @@ from abstractPessoa import AbstractPessoa
 
 class Pessoa(AbstractPessoa, ABC):
     def __init__(self, nome: str, codigo: int):
-        super().__init__(nome, codigo)
+        self.__nome = nome
+        self.__codigo = codigo
         
     @property
     def nome(self):

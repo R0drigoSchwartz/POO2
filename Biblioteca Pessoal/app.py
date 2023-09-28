@@ -14,6 +14,16 @@ amigo3 = Amigo("Lucas", ["40023322"], "lucas@gmail.com")
 
 biblioteca = BibliotecaPessoal()
 
+
+biblioteca.adiciona_amigo(amigo1)
+biblioteca.adiciona_amigo(amigo2)
+biblioteca.adiciona_amigo(amigo3)
+
+biblioteca.adiciona_livro(livro1)
+biblioteca.adiciona_livro(livro2)
+biblioteca.adiciona_livro(livro3)
+biblioteca.adiciona_livro(livro4)
+
 biblioteca.empresta_livro(amigo1, livro1, datetime.now())
 biblioteca.ver_livros_emprestados()
 
@@ -23,4 +33,7 @@ biblioteca.empresta_livro(amigo3, livro3, datetime.now())
 biblioteca.ver_livros_emprestados()
 
 biblioteca.devolve_livro(livro4, datetime.now())
+biblioteca.ver_livros_emprestados()
+
+biblioteca.empresta_livro(amigo1, livro1, datetime.now())
 biblioteca.ver_livros_emprestados()

@@ -34,12 +34,19 @@ class BibliotecaPessoal:
             print("O parâmetro não foi passado corretamente!")
 
     def empresta_livro(self, amigo, livro, data_inicio):
+        emprestado = False
         if isinstance(amigo, Amigo) and isinstance(livro, Livro) and isinstance(data_inicio, datetime):
-            if livro not in self.livros:
-                emprestimo = Emprestimo(amigo, livro, data_inicio)
-                self.emprestimos.append(emprestimo)
+            if livro in self.livros and amigo in self.amigos:
+                for emprestimos in self.emprestimos:
+                    if emprestimos.livro == livro:
+                        print("Não é possível emprestar esse livro, pois ele já foi emprestado!")
+                        emprestado = True
+                        break
+                if not emprestado:
+                    emprestimo = Emprestimo(amigo, livro, data_inicio)
+                    self.emprestimos.append(emprestimo)
             else:
-                print("Este livro já está emprestado")
+                print("Esse livro ou amigo não está cadastrado na Biblioteca!")
         else:
             print("Os parâmetros não foram passados corretamente!")
     

@@ -54,7 +54,7 @@ class BibliotecaPessoal:
         if isinstance(livro, Livro) and isinstance(data_fim, datetime):
             cont = 0
             for emprestimos in self.emprestimos:
-                if emprestimos.ativo:
+                if emprestimos.livro == livro:
                     self.emprestimos.remove(emprestimos)
                     livro.data_fim = data_fim
                     return

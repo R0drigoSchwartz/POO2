@@ -52,8 +52,10 @@ class ClienteController:
         if nome == "" or nome.isdigit() or not codigo.isdigit():
             return "Os campos devem ser preenchidos corretamente!"
         else:
-            self.__clienteDAO.add(Cliente(nome, codigo))
-            return "Cliente cadastrado!"
+            if codigo not in self.__clienteDAO.cache:
+                self.__clienteDAO.add(Cliente(nome, codigo))
+                return "Cliente cadastrado!"
+            return "Já há um cliente cadastrado com esse código!"
         
     def remove_cliente(self, nome: str, codigo: str):
         if nome == "" or nome.isdigit() or not codigo.isdigit():
@@ -64,6 +66,8 @@ class ClienteController:
     
     def listar_clientes(self):
         str_aux = ""
+        if len(self.__clienteDAO.cache) == 0:
+            return "Nenhum cliente cadastrado"
         for key in self.__clienteDAO.cache:
             str_aux += f"Cliente: {self.__clienteDAO.cache[key].nome}, código: {key}\n"
         return str_aux

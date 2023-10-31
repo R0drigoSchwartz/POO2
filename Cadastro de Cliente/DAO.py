@@ -21,8 +21,9 @@ class DAO(ABC):
         f.close()
 
     def add(self, key, obj):
-        self.__cache[key] = obj
-        self.__dump()
+            self.__cache[key] = obj
+            self.__dump()
+        
 
     def remove(self, key):
         try:

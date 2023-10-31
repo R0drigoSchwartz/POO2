@@ -1,11 +1,12 @@
-from Cliente import Cliente
+from ClienteDAO import ClienteDAO
 from ClienteView import ClienteView
+from Cliente import Cliente
 import PySimpleGUI as sg
 
 class ClienteController:
     def __init__(self):
         self.__telaCliente = ClienteView(self)
-        self.__clientes = {} #lista de objetos Cliente
+        self.__clienteDAO = ClienteDAO()
     
     def inicia(self):
         #inicia a tela de consulta
@@ -38,46 +39,36 @@ class ClienteController:
         
         self.__telaCliente.fim()
 
-
     def busca_codigo(self, codigo: str):
         if not codigo.isdigit():
             return "O código deve ser um número!"
-        else:
-            for key in self.__clientes.keys():
-                if key == codigo:
-                    return f"Nome: {self.__clientes[codigo].nome}, código: {codigo}"
-                
-            return "Cadastro não encontrado"
+        for key in self.__clienteDAO.cache:
+           if key == codigo:
+                return f"Nome: {self.__clienteDAO.cache[key].nome}"
+        return "Não há nenhum cliente cadastrado com esse código"
 
-        
-    
     #cria novo OBJ cliente e adiciona ao dict, cuja chave e o codigo
     def adiciona_cliente(self, nome: str, codigo: str):
         if nome == "" or nome.isdigit() or not codigo.isdigit():
             return "Os campos devem ser preenchidos corretamente!"
         else:
-            if codigo not in self.__clientes.keys():
-                self.__clientes[codigo] = Cliente(nome, codigo)
-                return "Cliente cadastrado!"
-            else:
-                return "Já há um cliente cadastrado com esse código!"
-    
+            self.__clienteDAO.add(Cliente(nome, codigo))
+            return "Cliente cadastrado!"
+        
     def remove_cliente(self, nome: str, codigo: str):
         if nome == "" or nome.isdigit() or not codigo.isdigit():
             return "Os campos devem ser preenchidos corretamente!"
         else:
-            if codigo in self.__clientes.keys():
-                self.__clientes.pop(codigo)
-                return "Cliente removido!"
-            else:
-                return "Não há um cliente com esse código"
+            self.__clienteDAO.remove(codigo)
+            return "Cliente Removido!"
     
     def listar_clientes(self):
         str_aux = ""
-        for key in self.__clientes.keys():
-            str_aux += f"Nome: {self.__clientes[key].nome}, código: {key}\n"
+        for key in self.__clienteDAO.cache:
+            str_aux += f"Cliente: {self.__clienteDAO.cache[key].nome}, código: {key}\n"
         return str_aux
-            
+           
+
     
 
 

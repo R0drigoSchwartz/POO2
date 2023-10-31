@@ -1,5 +1,5 @@
 from ClienteController import ClienteController
 
-cliente = ClienteController()
+control = ClienteController()
 
-cliente.inicia()
+control.inicia()

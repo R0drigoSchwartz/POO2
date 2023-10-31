@@ -12,3 +12,9 @@ class ClienteDAO(DAO):
     def remove(self, key):
         if isinstance(key, str):
             super().remove(key)
+
+    def get(self, key):
+        try:
+            self.cache[key]
+        except KeyError:
+            raise KeyError

@@ -42,10 +42,11 @@ class ClienteController:
     def busca_codigo(self, codigo: str):
         if not codigo.isdigit():
             return "O código deve ser um número!"
-        for key in self.__clienteDAO.cache:
-           if key == codigo:
-                return f"Nome: {self.__clienteDAO.cache[key].nome}"
-        return "Não há nenhum cliente cadastrado com esse código"
+        try:
+            self.__clienteDAO.get(codigo) 
+            return f"Nome: {self.__clienteDAO.cache[codigo].nome}"
+        except KeyError:
+            return "Não há nenhum cliente cadastrado com esse código"
 
     #cria novo OBJ cliente e adiciona ao dict, cuja chave e o codigo
     def adiciona_cliente(self, nome: str, codigo: str):

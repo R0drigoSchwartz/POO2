@@ -1,12 +1,16 @@
 from ClienteDAO import ClienteDAO
 from ClienteView import ClienteView
 from Cliente import Cliente
+from ImportView import ImportView
+from ExportView import ExportView
 import PySimpleGUI as sg
 
 class ClienteController:
     def __init__(self):
         self.__telaCliente = ClienteView(self)
         self.__clienteDAO = ClienteDAO()
+        self.__telaExport = ExportView(self)
+        self.__telaImport = ImportView(self)
     
     def inicia(self):
         #inicia a tela de consulta

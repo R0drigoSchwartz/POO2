@@ -21,10 +21,15 @@ class DAO(ABC):
         f.close()
 
     def add(self, key, obj):
-            self.__cache[key] = obj
-            self.__dump()
-        
+        self.__cache[key] = obj
+        self.__dump()
 
+    def get(self, key):
+        try:
+            self.__cache[key]
+        except KeyError:
+            raise KeyError
+    
     def remove(self, key):
         try:
             self.__cache.pop(key)
@@ -35,5 +40,6 @@ class DAO(ABC):
     @property
     def cache(self):
         return self.__cache
+
     
    

@@ -39,32 +39,32 @@ class ClienteController:
         
         self.__telaCliente.fim()
 
-    def busca_codigo(self, codigo: str):
+    #busca um cliente com o codigo passado no dict, e retorna ele se existir
+    def busca_codigo(self, codigo: str): 
         if not codigo.isdigit():
             return "O código deve ser um número!"
         try:
             self.__clienteDAO.get(codigo) 
-            return f"Nome: {self.__clienteDAO.cache[codigo].nome}"
+            return f"Nome: {self.__clienteDAO.cache[codigo].nome}" 
         except KeyError:
-            return "Não há nenhum cliente cadastrado com esse código"
+            return "Não há nenhum cliente cadastrado com esse código"  
 
     #cria novo OBJ cliente e adiciona ao dict, cuja chave e o codigo
     def adiciona_cliente(self, nome: str, codigo: str):
         if nome == "" or nome.isdigit() or not codigo.isdigit():
             return "Os campos devem ser preenchidos corretamente!"
-        else:
-            if codigo not in self.__clienteDAO.cache:
-                self.__clienteDAO.add(Cliente(nome, codigo))
-                return "Cliente cadastrado!"
-            return "Já há um cliente cadastrado com esse código!"
-        
+        if codigo not in self.__clienteDAO.cache:
+            self.__clienteDAO.add(Cliente(nome, codigo))
+            return "Cliente cadastrado!"
+        return "Já há um cliente cadastrado com esse código!"
+    
+    #remove cliete do dict, caso exista
     def remove_cliente(self, nome: str, codigo: str):
         if nome == "" or nome.isdigit() or not codigo.isdigit():
             return "Os campos devem ser preenchidos corretamente!"
-        else:
-            self.__clienteDAO.remove(codigo)
-            return "Cliente Removido!"
-    
+        self.__clienteDAO.remove(codigo)
+        return "Cliente Removido!"
+
     def listar_clientes(self):
         str_aux = ""
         if len(self.__clienteDAO.cache) == 0:
@@ -72,9 +72,6 @@ class ClienteController:
         for key in self.__clienteDAO.cache:
             str_aux += f"Cliente: {self.__clienteDAO.cache[key].nome}, código: {key}\n"
         return str_aux
-           
-
-    
 
 
 

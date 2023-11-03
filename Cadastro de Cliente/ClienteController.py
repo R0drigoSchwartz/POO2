@@ -36,6 +36,13 @@ class ClienteController:
             
             elif event == "Listar Clientes":
                 resultado = self.listar_clientes()
+            
+            elif event == "Importar":
+                resultado = self.handle_import()
+            
+            elif event == "Exportar":
+                self.handle_export()
+
 
             if resultado != "":
                 dados = str(resultado)
@@ -76,6 +83,42 @@ class ClienteController:
         for key in self.__clienteDAO.cache:
             str_aux += f"Cliente: {self.__clienteDAO.cache[key].nome}, código: {key}\n"
         return str_aux
+
+    def handle_import(self):
+        self.__telaImport.tela_consulta()
+
+        import_ativa = True
+
+        while import_ativa:
+            event_import, values_import = self.__telaImport.le_eventos()
+
+            if event_import == sg.WIN_CLOSED:
+                self.__telaImport.fim()
+                import_ativa = False
+            
+            elif event_import == "Importar":
+                path = values_import["importar"]
+                self.__clienteDAO.import_source(path)
+                self.__telaImport.fim()
+                import_ativa = False
+    
+    def handle_export(self):
+        self.__telaExport.tela_consulta()
+
+        export_ativa = True
+
+        while export_ativa:
+            event_export, event_values = self.__telaExport.le_eventos()
+
+            if event_export == sg.WIN_CLOSED:
+                self.__telaExport.fim()
+                export_ativa = False
+            
+            elif event_export == "Exportar":
+                path = event_values["caminho_exportar"]
+                self.__clienteDAO.set_data_source(path)
+                self.__telaExport.fim()
+                export_ativa = False           
 
 
 

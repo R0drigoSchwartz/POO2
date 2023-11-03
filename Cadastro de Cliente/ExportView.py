@@ -1,4 +1,3 @@
-from ClienteController import ClienteController
 import PySimpleGUI as sg
 
 class ExportView:
@@ -10,7 +9,7 @@ class ExportView:
     def tela_consulta(self):
         self.__container = [
         [sg.Text("Digite o nome do arquivo que quer salvar:")],
-        [sg.InputText(key="nome_exportar")],
+        [sg.InputText(key="caminho_exportar")],
         [sg.Button("Exportar")]
         ]
         

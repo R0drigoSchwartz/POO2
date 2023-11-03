@@ -1,4 +1,3 @@
-from ClienteController import ClienteController
 import PySimpleGUI as sg
 
 class ImportView:
@@ -9,7 +8,7 @@ class ImportView:
 
     def tela_consulta(self):
         self.__container = [
-        [sg.InputText(key="nome_exportar"), sg.Button("Browse")],
+        [sg.InputText(key="importar")],
         [sg.Button("Importar")]
         ]
         

@@ -8,12 +8,12 @@ class ClienteView:
     
     def tela_consulta(self):
         self.__container = [
-                [sg.Text("Digite o código ou o nome do cliente e clique na ação desejada", font=("Helvetica", 15), pad=(35,0))],
+                [sg.Text("Digite o código ou o nome do cliente e clique na ação desejada", font=("Helvetica", 15), pad=(65,0))],
                 [sg.Text("")],
                 [sg.Text("Nome:"), sg.InputText("", key="nome", pad=(15, 0))],
                 [sg.Text("Código:"), sg.InputText("", key="codigo")],
                 [sg.Text("")],
-                [sg.Button("Cadastrar", pad=(25, 0)), sg.Button("Consultar", pad=(25,0)), sg.Button("Remover", pad=(25,0)), sg.Button("Listar Clientes", pad=(25,0))],
+                [sg.Button("Cadastrar", pad=(10, 0)), sg.Button("Consultar", pad=(10,0)), sg.Button("Remover", pad=(10,0)), sg.Button("Listar Clientes", pad=(10,0)), sg.Button("Exportar", pad=(10, 0)), sg.Button("Importar", pad=(10, 0))],
                 [sg.Text("")],
                 [sg.Text("", key="resultado")]
             ]
